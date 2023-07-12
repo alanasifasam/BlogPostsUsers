@@ -1,12 +1,7 @@
-﻿namespace BlogPostsUsers.Domain.Model
+﻿namespace BlogPostsUsers.Domain.Model.DTOs
 {
-    public class User
-    {   
-        public User()
-        {
-            Posts = new List<Post>();
-        }
-
+    public class UserDTO
+    {
         public string last_name { get; set; }
         public string email { get; set; }
         public int id { get; set; }
@@ -22,6 +17,6 @@
         public string city { get; set; }
         public string country { get; set; }
         public double longitude { get; set; }
-        public ICollection<Post>? Posts { get; set;}
     }
+
 }

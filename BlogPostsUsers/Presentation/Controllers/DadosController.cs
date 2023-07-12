@@ -19,8 +19,17 @@ namespace BlogPostsUsers.Presentation.Controllers
         [Route(template: "Dados/PostAsync")]
         public async Task<IActionResult> PostAsync()
         {
-            var ok = await _dadosService.SincronizarDados();
-            return Ok();
+            try
+            {
+                _dadosService.SincronizarDados();
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            
         }
     }
 }

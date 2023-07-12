@@ -4,6 +4,6 @@ namespace BlogPostsUsers.Domain.Interfaces
 {
     public interface IDadosService
     {
-        Task<IActionResult> SincronizarDados();
+        void SincronizarDados();
     }
 }

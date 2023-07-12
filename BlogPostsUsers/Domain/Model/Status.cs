@@ -1,4 +1,6 @@
-﻿namespace BlogPostsUsers.Domain.Model
+﻿using BlogPostsUsers.Domain.Model.DTOs;
+
+namespace BlogPostsUsers.Domain.Model
 {
     public class Status
     {
@@ -8,6 +10,6 @@
         public int total_users { get; set; }
         public int offset { get; set; }
         public int limit { get; set; }
-        public IList<User> users { get; set; }
+        public IList<UserDTO> users { get; set; }
     }
 }

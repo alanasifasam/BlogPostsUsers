@@ -1,13 +1,22 @@
 using BlogPostsUsers.Application.Services;
 using BlogPostsUsers.Domain.Interfaces;
+using BlogPostsUsers.Infrastructure.DBContext;
+using BlogPostsUsers.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Context
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ContextDb>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 
 //Services
 builder.Services.AddScoped<IDadosService, DadosService>();
+builder.Services.AddScoped<IDadosRepository, DadosRepository>(); 
 
 
 
