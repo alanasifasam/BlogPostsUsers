@@ -5,7 +5,7 @@ using BlogPostsUsers.Infrastructure.DBContext;
 
 namespace BlogPostsUsers.Infrastructure.Repository
 {
-    public class DadosRepository : IDadosRepository 
+    public class DadosRepository : IDadosRepository
     {
         private readonly ContextDb _dbContext;
 
@@ -14,16 +14,72 @@ namespace BlogPostsUsers.Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public async void SaveAsync(IList<UserDTO> userDTOs)
+        public async Task SaveUser(IList<UserDTO> userDTOs)
         {
             try
             {
-                 
-            }
-            catch (Exception)
-            {
+                foreach (var item in userDTOs)
+                {
+                    var user = new User()
+                    {
+                        city = item.city,
+                        country = item.country,
+                        date_of_birth = item.date_of_birth,
+                        email = item.email,
+                        first_name = item.first_name,
+                        gender = item.gender,
+                        id = item.id,
+                        job = item.job,
+                        last_name = item.last_name,
+                        latitude = item.latitude,
+                        longitude = item.longitude,
+                        phone = item.phone,
+                        state = item.state,
+                        street = item.street,
+                        zipcode = item.zipcode,
+                    };
 
-                throw;
+                    _dbContext.Users.Add(user);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+        }
+
+        public async Task SavePost(IList<BlogDTO> BlogDTOs)
+        {
+            try
+            {
+                foreach (var item in BlogDTOs)
+                {
+                    var post = new Post()
+                    {
+                        category = item.category,
+                        content_html = item.content_html,
+                        content_text = item.content_text,
+                        created_at = item.created_at,
+                        description = item.description,
+                        photo_url = item.photo_url,
+                        title = item.title,
+                        updated_at = item.updated_at,
+                        user_id = item.user_id,
+       
+                    };
+
+                    _dbContext.Posts.Add(post);
+                     await _dbContext.SaveChangesAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
             }
         }
     }

@@ -8,7 +8,7 @@ namespace BlogPostsUsers.Infrastructure.DBContext.Map
     {
         public void Configure(EntityTypeBuilder<User> builder ) 
         {
-            builder.HasKey(x => x.id );
+            builder.HasKey(x => x.id);
             builder.Property(x => x.last_name);
             builder.Property(x => x.email);
             builder.Property(x => x.phone);

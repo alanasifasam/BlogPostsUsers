@@ -19,7 +19,7 @@ namespace BlogPostsUsers.Application.Services
             _dadosRepository = dadosRepository;
         }
         
-        public async void SincronizarDados()
+        public async Task SincronizarDados()
         {
             try
             {
@@ -37,8 +37,8 @@ namespace BlogPostsUsers.Application.Services
                 var dados = JsonConvert.DeserializeObject<Status>(contentUser);
                 var dados2 = JsonConvert.DeserializeObject<StatusBlog>(contentBlog);
 
-                _dadosRepository.SaveAsync(dados.users);
-
+                // await _dadosRepository.SaveUser(dados.users);
+                 await _dadosRepository.SavePost(dados2.blogs);
             }
             catch (Exception)
             {

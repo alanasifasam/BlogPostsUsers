@@ -73,10 +73,7 @@ namespace BlogPostsUsers.Migrations
             modelBuilder.Entity("BlogPostsUsers.Domain.Model.User", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("city")
                         .IsRequired()

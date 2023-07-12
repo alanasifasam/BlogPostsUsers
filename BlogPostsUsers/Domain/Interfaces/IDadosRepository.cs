@@ -4,6 +4,7 @@ namespace BlogPostsUsers.Domain.Interfaces
 {
     public interface IDadosRepository
     {
-        void SaveAsync(IList<UserDTO> userDTOs);
+        Task SaveUser(IList<UserDTO> userDTOs);
+        Task SavePost(IList<BlogDTO> BlogDTOs);
     }
 }

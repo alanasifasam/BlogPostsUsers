@@ -15,19 +15,19 @@ namespace BlogPostsUsers.Presentation.Controllers
             _dadosService = dadosService;
         }
 
-        [HttpPost]
-        [Route(template: "Dados/PostAsync")]
-        public async Task<IActionResult> PostAsync()
+        [HttpGet]
+        [Route(template: "Dados/GetAsync")]
+        public async Task<IActionResult> GetAsync()
         {
             try
             {
-                _dadosService.SincronizarDados();
+                await _dadosService.SincronizarDados();
                 return Ok();
             }
             catch (Exception)
             {
 
-                return BadRequest();
+                return StatusCode(500);
             }
             
         }

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogPostsUsers.Domain.Model.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPostsUsers.Domain.Interfaces
 {
     public interface IDadosService
     {
-        void SincronizarDados();
+        Task SincronizarDados();
+        
     }
 }
