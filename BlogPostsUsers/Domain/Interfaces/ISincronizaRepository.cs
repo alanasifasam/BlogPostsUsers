@@ -2,9 +2,9 @@
 
 namespace BlogPostsUsers.Domain.Interfaces
 {
-    public interface IDadosRepository
+    public interface ISincronizaRepository
     {
         Task SaveUser(IList<UserDTO> userDTOs);
-        Task SavePost(IList<BlogDTO> BlogDTOs);
+        Task SavePost(IList<PostDTO> BlogDTOs);
     }
 }

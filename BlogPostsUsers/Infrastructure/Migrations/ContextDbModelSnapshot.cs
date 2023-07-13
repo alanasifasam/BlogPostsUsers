@@ -73,7 +73,10 @@ namespace BlogPostsUsers.Migrations
             modelBuilder.Entity("BlogPostsUsers.Domain.Model.User", b =>
                 {
                     b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("city")
                         .IsRequired()
@@ -138,7 +141,7 @@ namespace BlogPostsUsers.Migrations
                     b.HasOne("BlogPostsUsers.Domain.Model.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");

@@ -9,7 +9,7 @@ namespace BlogPostsUsers.Infrastructure.DBContext.Map
         public void Configure(EntityTypeBuilder<Post> builder)
         {
             builder.HasKey(x => x.id);
-            builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x =>x.user_id).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.user_id);
             builder.Property(x => x.title);
             builder.Property(x => x.content_text);
             builder.Property(x => x.photo_url);

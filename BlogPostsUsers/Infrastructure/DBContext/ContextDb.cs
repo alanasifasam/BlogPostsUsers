@@ -13,7 +13,7 @@ namespace BlogPostsUsers.Infrastructure.DBContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().Property(x => x.id).ValueGeneratedNever();
+           
             modelBuilder.ApplyConfiguration( new UserMap());
             modelBuilder.ApplyConfiguration( new PostMap());
         }

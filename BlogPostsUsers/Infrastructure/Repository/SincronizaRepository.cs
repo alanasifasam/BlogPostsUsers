@@ -5,11 +5,11 @@ using BlogPostsUsers.Infrastructure.DBContext;
 
 namespace BlogPostsUsers.Infrastructure.Repository
 {
-    public class DadosRepository : IDadosRepository
+    public class SincronizaRepository : ISincronizaRepository
     {
         private readonly ContextDb _dbContext;
 
-        public DadosRepository(ContextDb dbContext)
+        public SincronizaRepository(ContextDb dbContext)
         {
             _dbContext = dbContext;
         }
@@ -28,7 +28,6 @@ namespace BlogPostsUsers.Infrastructure.Repository
                         email = item.email,
                         first_name = item.first_name,
                         gender = item.gender,
-                        id = item.id,
                         job = item.job,
                         last_name = item.last_name,
                         latitude = item.latitude,
@@ -51,11 +50,11 @@ namespace BlogPostsUsers.Infrastructure.Repository
             }
         }
 
-        public async Task SavePost(IList<BlogDTO> BlogDTOs)
+        public async Task SavePost(IList<PostDTO> PostDTOs)
         {
             try
             {
-                foreach (var item in BlogDTOs)
+                foreach (var item in PostDTOs)
                 {
                     var post = new Post()
                     {
@@ -68,11 +67,10 @@ namespace BlogPostsUsers.Infrastructure.Repository
                         title = item.title,
                         updated_at = item.updated_at,
                         user_id = item.user_id,
-       
                     };
 
                     _dbContext.Posts.Add(post);
-                     await _dbContext.SaveChangesAsync();
+                    await _dbContext.SaveChangesAsync();
                 }
 
             }

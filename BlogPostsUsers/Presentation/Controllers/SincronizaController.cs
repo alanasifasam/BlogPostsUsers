@@ -1,27 +1,27 @@
-﻿using BlogPostsUsers.Application.Services;
+﻿
 using BlogPostsUsers.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPostsUsers.Presentation.Controllers
 {
     [ApiController]
-    [Route(template:"V1")]
-    public class DadosController : ControllerBase
+    [Route(template:"v1")]
+    public class SincronizaController : ControllerBase
     {
 
-        private readonly IDadosService _dadosService;
-        public DadosController(IDadosService dadosService)
+        private readonly ISincronizaService _sincronizaService;
+        public SincronizaController(ISincronizaService sincronizaService)
         {
-            _dadosService = dadosService;
+            _sincronizaService = sincronizaService;
         }
 
         [HttpGet]
-        [Route(template: "Dados/GetAsync")]
+        [Route(template: "api/Sincroniza/GetAsync")]
         public async Task<IActionResult> GetAsync()
         {
             try
             {
-                await _dadosService.SincronizarDados();
+                await _sincronizaService.SincronizarDados();
                 return Ok();
             }
             catch (Exception)

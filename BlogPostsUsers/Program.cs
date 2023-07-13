@@ -15,9 +15,10 @@ builder.Services.AddDbContext<ContextDb>(options =>
 
 
 //Services
-builder.Services.AddScoped<IDadosService, DadosService>();
-builder.Services.AddScoped<IDadosRepository, DadosRepository>(); 
-
+builder.Services.AddScoped<ISincronizaService, SincronizaService>();
+builder.Services.AddScoped<ISincronizaRepository, SincronizaRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 builder.Services.AddHttpClient();

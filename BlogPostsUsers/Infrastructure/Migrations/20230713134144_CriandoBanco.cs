@@ -15,21 +15,22 @@ namespace BlogPostsUsers.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false),
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    first_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     last_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    date_of_birth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    job = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    state = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     zipcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    latitude = table.Column<double>(type: "float", nullable: false),
-                    gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    first_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    date_of_birth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    job = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    state = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    longitude = table.Column<double>(type: "float", nullable: false)
+                    longitude = table.Column<double>(type: "float", nullable: false),
+                    latitude = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,15 +43,15 @@ namespace BlogPostsUsers.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    user_id = table.Column<int>(type: "int", nullable: false),
                     title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    content_text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    photo_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    photo_url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    content_html = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    user_id = table.Column<int>(type: "int", nullable: false)
+                    content_text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    content_html = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +60,8 @@ namespace BlogPostsUsers.Migrations
                         name: "FK_Posts_Users_user_id",
                         column: x => x.user_id,
                         principalTable: "Users",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

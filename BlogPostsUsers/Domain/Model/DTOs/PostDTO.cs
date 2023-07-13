@@ -1,6 +1,6 @@
 ﻿namespace BlogPostsUsers.Domain.Model.DTOs
 {
-    public class BlogDTO
+    public class PostDTO
     {
         public string title { get; set; }
         public string content_text { get; set; }
