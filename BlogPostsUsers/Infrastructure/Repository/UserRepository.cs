@@ -28,11 +28,11 @@ namespace BlogPostsUsers.Infrastructure.Repository
             }
         }
 
-        public async Task<User> GetUserById(int Id)
+        public User GetUserById(int Id)
         {
             try
             {
-                var user = await _dbContext.Users.Include(x => x.Posts).FirstOrDefaultAsync(x => x.id == Id);
+                var user =  _dbContext.Users.Include(x => x.Posts).FirstOrDefault(x => x.id == Id);
                 return user;
             }
             catch (Exception)

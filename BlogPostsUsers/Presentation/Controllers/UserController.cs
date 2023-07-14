@@ -36,16 +36,15 @@ namespace BlogPostsUsers.Presentation.Controllers
 
         [HttpGet]
         [Route(template: "api/User/GetUserPosts")]
-        public async Task<IActionResult> GetUserPosts(int id)
+        public IActionResult GetUserPosts(int id)
         {
             try
             {
-                if (id == null) return BadRequest();
-
-                var user = await _userService.GetUserById(id);
+                
+                var user =  _userService.GetUserById(id);
 
                 var response = new { User = user };
-
+                
                 return user == null ? NotFound() : Ok(response);
             }
             catch (Exception e)

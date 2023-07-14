@@ -5,6 +5,6 @@ namespace BlogPostsUsers.Domain.Interfaces
     public interface IUserService
     {
         Task<IEnumerable<User>> GetAllUsers();
-        Task<User> GetUserById(int id);
+        User GetUserById(int id);
     }
 }

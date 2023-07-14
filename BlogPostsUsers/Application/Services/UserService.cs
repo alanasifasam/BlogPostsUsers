@@ -1,6 +1,7 @@
 ﻿using BlogPostsUsers.Domain.Interfaces;
 using BlogPostsUsers.Domain.Model;
 using BlogPostsUsers.Domain.Model.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace BlogPostsUsers.Application.Services
 {
@@ -28,11 +29,13 @@ namespace BlogPostsUsers.Application.Services
 			}
         }
 
-        public async Task<User> GetUserById(int id)
+        public  User GetUserById(int id)
         {
             try
             {
-                return await _userRepository.GetUserById(id);
+                if (id == null) return null;
+
+                return _userRepository.GetUserById(id);
             }
             catch (Exception)
             {
