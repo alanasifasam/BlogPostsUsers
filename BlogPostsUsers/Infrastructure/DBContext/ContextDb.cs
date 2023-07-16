@@ -10,6 +10,8 @@ namespace BlogPostsUsers.Infrastructure.DBContext
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<StatusUser> StatusUsers { get; set; }
+        public DbSet<StatusPost> StatusPosts { get; set; }    
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

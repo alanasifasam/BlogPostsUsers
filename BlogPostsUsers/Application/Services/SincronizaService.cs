@@ -9,14 +9,16 @@ namespace BlogPostsUsers.Application.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ISincronizaRepository _sincronizaRepository;
-        
 
+       
         public SincronizaService(HttpClient httpClient, ISincronizaRepository sincronizaRepository)
         {
             _httpClient = httpClient;
             _sincronizaRepository = sincronizaRepository;
         }
+
         
+
         public async Task SincronizarDados()
         {
             try
@@ -27,20 +29,32 @@ namespace BlogPostsUsers.Application.Services
 
                 while (offset <= 900) 
                 {
-                    var responseTasks = Task.WhenAll(
-                        _httpClient.GetAsync($"{url}users?offset={offset}&limit={limit}"),
-                        _httpClient.GetAsync($"{url}blog-posts?offset={offset}&limit={limit}")
-                    );
+                    
+                        var responseTasks = Task.WhenAll(
+                            _httpClient.GetAsync($"{url}users?offset={offset}&limit={limit}"),
+                            _httpClient.GetAsync($"{url}blog-posts?offset={offset}&limit={limit}")
+                        );
 
-                    var responses = await responseTasks;
-                    var contentUser = await responses[0].Content.ReadAsStringAsync();
-                    var contentBlog = await responses[1].Content.ReadAsStringAsync();
+                        var responses = await responseTasks;
+                        var contentUser = await responses[0].Content.ReadAsStringAsync();
+                        var contentBlog = await responses[1].Content.ReadAsStringAsync();
 
-                    var dados = JsonConvert.DeserializeObject<Status>(contentUser);
-                    var dados2 = JsonConvert.DeserializeObject<StatusPost>(contentBlog);
+                        var dados = JsonConvert.DeserializeObject<StatusUser>(contentUser);
+                        var dados2 = JsonConvert.DeserializeObject<StatusPost>(contentBlog);
 
-                    await _sincronizaRepository.SaveUser(dados.users);
-                    await _sincronizaRepository.SavePost(dados2.Blogs);
+                    var offUser = _sincronizaRepository.GetOffset(offset);
+                    var offPost = _sincronizaRepository.GetOffsetPost(offset);
+
+                    if (offUser == null) 
+                    {
+                        _sincronizaRepository.SaveStatusUser(dados);
+                        await _sincronizaRepository.SaveUser(dados.users);
+                    }
+                    if (offPost == null) 
+                    {
+                        _sincronizaRepository.SaveStatusPost(dados2);
+                        await _sincronizaRepository.SavePost(dados2.Blogs);
+                    }
 
                     offset = offset + limit;
                 }

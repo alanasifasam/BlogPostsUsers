@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  blogpostsusers:
+    image: ${DOCKER_REGISTRY-}blogpostsusers
+    build:
+      context: .
+      dockerfile: BlogPostsUsers/Dockerfile
+      
+
+    ports:
+     - "8081:80"
+    depends_on:
+     - sqldata
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+        - MSSQL_SA_PASSWORD=BlogPostsUsersAbc123..
+        - ACCEPT_EULA=Y
+    volumes:
+        - C:\volume:/var/opt/mssql/data
+    ports:
+        - "1433:1433"

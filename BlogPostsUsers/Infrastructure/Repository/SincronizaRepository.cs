@@ -80,5 +80,80 @@ namespace BlogPostsUsers.Infrastructure.Repository
 
             }
         }
+
+
+
+        public void SaveStatusUser(StatusUser statusUser)
+        {
+            try
+            {
+                var status = new StatusUser()
+                {
+                    limit = statusUser.limit,
+                    message = statusUser.message,
+                    offset = statusUser.offset,
+                    success = statusUser.success,
+                    time = statusUser.time,
+                    total_users = statusUser.total_users,
+                    users = null
+                };
+                _dbContext.StatusUsers.Add(status);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void SaveStatusPost(StatusPost statusPost)
+        {
+            try
+            {
+                var statusP = new StatusPost()
+                {
+                    success = statusPost.success,
+                    offset = statusPost.offset,
+                    limit = statusPost.limit,
+                    message = statusPost.message,
+                };
+                _dbContext.StatusPosts.Add(statusP);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public StatusUser GetOffset(int off)
+        {
+            try
+            {
+                var offsetUser = _dbContext.StatusUsers.Where(x => x.offset == off).FirstOrDefault();
+                return offsetUser;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public StatusPost GetOffsetPost(int offpost)
+        {
+            try
+            {
+                var offsetPost = _dbContext.StatusPosts.Where(x => x.offset == offpost).FirstOrDefault();
+                return offsetPost;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
