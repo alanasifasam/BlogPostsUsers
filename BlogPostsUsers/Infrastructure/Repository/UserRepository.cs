@@ -18,7 +18,7 @@ namespace BlogPostsUsers.Infrastructure.Repository
         {
             try
             {
-                var users = await _dbContext.Users.ToListAsync();
+                var users = await _dbContext.Users.Include(x =>x.Posts).ToListAsync();
                 return users;
             }
             catch (Exception)
